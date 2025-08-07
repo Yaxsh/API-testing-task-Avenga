@@ -1,0 +1,5 @@
+mvn*
+HELP.md
+.idea
+/target
+/allure-results
