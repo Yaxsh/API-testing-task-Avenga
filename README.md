@@ -17,11 +17,11 @@ This project automates the testing of a RESTful API using **Java**, **Rest Assur
 **Project instructions**
 
 1. Clone the repository:
-   git clone https://github.com/Yaxsh/API-testing-task-Avenga.git
-   cd API-testing-task-Avenga
+   ```git clone https://github.com/Yaxsh/API-testing-task-Avenga.git```
+   ```cd API-testing-task-Avenga```
 2. Build the project:
-   mvn clean compile
+   ```mvn clean compile```
 3. Run tests:
-   mvn test
+   ```mvn test```
 4. Generate Allure report (required Allure CLI):
-   allure serve target/allure-results
+   ```allure serve target/allure-results```
