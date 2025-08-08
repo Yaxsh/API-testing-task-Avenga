@@ -1,6 +1,6 @@
 mvn*
 HELP.md
-.idea
+/idea
 /target
 /allure-results
 /allure-report
