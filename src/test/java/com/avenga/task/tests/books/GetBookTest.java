@@ -1,7 +1,7 @@
 package com.avenga.task.tests.books;
 
 import com.avenga.task.assertions.BookAssertions;
-import com.avenga.task.base.TestBase;
+import com.avenga.task.tests.TestBase;
 import com.avenga.task.endpoints.BookEndpoints;
 import com.avenga.task.models.Book;
 import com.avenga.task.util.JsonUtils;
@@ -9,20 +9,24 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static com.avenga.task.assertions.ResponseAssertions.*;
 
 public class GetBookTest extends TestBase {
 
     @Test
-    public void getAllBooks_shouldReturn200AndListOfBooks() {
+    public void getAllBooks() {
         Response response = BookEndpoints.getAllBooks();
 
         assertStatusCode(response, 200);
+        List<Book> allBooks = JsonUtils.fromResponseToBookList(response);
+        Assert.assertEquals(allBooks.size(), 200, "Response book list is not as expected.");
         logResponse(response);
     }
 
     @Test
-    public void getBookById_shouldReturnCorrectBook() {
+    public void getBookById() {
         int bookId = 1;
 
         Response response = BookEndpoints.getBookById(bookId);
@@ -34,7 +38,7 @@ public class GetBookTest extends TestBase {
     }
 
     @Test
-    public void getBookByInvalidId_shouldReturn404() {
+    public void getBookByInvalidId() {
         int invalidId = 99999;
 
         Response response = BookEndpoints.getBookById(invalidId);

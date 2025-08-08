@@ -1,20 +1,21 @@
 package com.avenga.task.util;
 
+import com.avenga.task.models.Author;
+import com.avenga.task.models.Book;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class JsonUtils {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    /**
-     * Convert Java object to JSON string.
-     */
     public static String toJson(Object obj) {
         try {
             return mapper.writeValueAsString(obj);
@@ -23,9 +24,6 @@ public class JsonUtils {
         }
     }
 
-    /**
-     * Convert JSON string to Java object.
-     */
     public static <T> T fromJson(String json, Class<T> clazz) {
         try {
             return mapper.readValue(json, clazz);
@@ -34,9 +32,6 @@ public class JsonUtils {
         }
     }
 
-    /**
-     * Deserialize a RestAssured Response body into a Java object.
-     */
     public static <T> T fromResponse(Response response, Class<T> clazz) {
         return fromJson(response.getBody().asString(), clazz);
     }
@@ -51,8 +46,24 @@ public class JsonUtils {
     }
 
     private static String readFileAsString(String filePath) throws IOException {
-        // Read all bytes from the file and then convert them to a String using the default charset
         return new String(Files.readAllBytes(Paths.get(filePath)));
+    }
+
+    public static <T> List<T> fromResponseToList(Response response, TypeReference<List<T>> typeRef) {
+        try {
+            String json = response.getBody().asString();
+            return mapper.readValue(json, typeRef);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to deserialize response to list: " + e.getMessage(), e);
+        }
+    }
+
+    public static List<Book> fromResponseToBookList(Response response) {
+        return fromResponseToList(response, new TypeReference<List<Book>>() {});
+    }
+
+    public static List<Author> fromResponseToAuthorList(Response response) {
+        return fromResponseToList(response, new TypeReference<List<Author>>() {});
     }
 }
 

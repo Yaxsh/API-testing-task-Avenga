@@ -27,6 +27,12 @@ public class BookEndpoints {
                 .post("/Books");
     }
 
+    public static Response createBook() {
+        return given()
+                .when()
+                .post("/Books");
+    }
+
     public static Response updateBook(int id, Book book) {
         return given()
                 .pathParam("id", id)
@@ -35,7 +41,21 @@ public class BookEndpoints {
                 .put("/Books/{id}");
     }
 
+    public static Response updateBook(int id) {
+        return given()
+                .pathParam("id", id)
+                .when()
+                .put("/Books/{id}");
+    }
+
     public static Response deleteBook(int id) {
+        return given()
+                .pathParam("id", id)
+                .when()
+                .delete("/Books/{id}");
+    }
+
+    public static Response deleteBook(String id) {
         return given()
                 .pathParam("id", id)
                 .when()
