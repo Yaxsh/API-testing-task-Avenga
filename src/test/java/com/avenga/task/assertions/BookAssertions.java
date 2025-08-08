@@ -8,7 +8,7 @@ import java.util.List;
 public class BookAssertions {
 
     public static void assertTwoBooksEqual(Book bookExpected, Book bookActual){
-        Assert.assertTrue(bookExpected.equals(bookActual), "Books are not identical");
+        Assert.assertEquals(bookActual, bookExpected, "Books are not identical");
     }
 
     public static void assertBookListLength(List<Book> bookList, int size){

@@ -29,7 +29,7 @@ public class GetAuthorTest extends TestBase {
 
         assertStatusCode(response, 200);
         Author authorById = JsonUtils.fromResponse(response, Author.class);
-        Assert.assertEquals(authorById.getId(), 15, "Response author id is not as expected.");
+        Assert.assertEquals(authorById.getId(), "15", "Response author id is not as expected.");
         logResponse(response);
     }
 

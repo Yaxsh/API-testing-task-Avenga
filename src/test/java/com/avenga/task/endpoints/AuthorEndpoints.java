@@ -1,7 +1,6 @@
 package com.avenga.task.endpoints;
 
 import com.avenga.task.models.Author;
-import com.avenga.task.models.Book;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;

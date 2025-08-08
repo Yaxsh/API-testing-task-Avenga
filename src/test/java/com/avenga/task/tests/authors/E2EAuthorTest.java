@@ -17,7 +17,7 @@ import static com.avenga.task.assertions.ResponseAssertions.logResponse;
 public class E2EAuthorTest extends TestBase {
 
     @Test
-    public static void E2EAuthorTest(){
+    public static void E2EAuthorTestFlow(){
         Allure.step("Get author");
         Response getAuthorResponse = AuthorEndpoints.getAuthorById(15);
         assertStatusCode(getAuthorResponse, 200);
